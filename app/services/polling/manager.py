@@ -63,16 +63,13 @@ class PollingManager():
             print(counter)
 
             for i, batch in enumerate(batches):
-                # if i > 0:
-                #     break
+                await asyncio.sleep(10)
                 results = await self.api_client.get_batch(batch)
                 batch_data: list[utils.CompareItemData] = []
                 for r in results:
                     if r['success']:
                         try:
-                            # print('r', r)
                             clear = utils.clear_response(r)
-                            print('clear', clear)
                         except Exception:
                             continue
                         item_data = utils.compare_item(clear)

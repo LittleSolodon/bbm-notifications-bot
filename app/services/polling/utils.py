@@ -24,7 +24,7 @@ def get_actual_items() -> list[int]:
     return all_favs
 
 def break_into_batches(items: list) -> list[list[int]]:
-    batch_size = 30
+    batch_size = 4
     return [items[i:i + batch_size] for i in range(0, len(items), batch_size)]
 
 def clear_response(r: dict):
