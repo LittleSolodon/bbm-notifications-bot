@@ -31,13 +31,12 @@ def make_text(data: list[utils.CompareItemData], items_data: list) -> list:
             stat_text = "💥"
         elif stat_type == 2:
             stat_text = "🛡️"
+
+        if stat_num is not None:
+            stat_text = "(" + stat_text + str(stat_num) + ")"
         else: stat_text = ""
 
-        if stat_num is None:
-            stat_num = ""
-
-        stat_text += str(stat_num)
-        link_template = f"<b><a href=\"https://t.me/banditchatbot/market?startapp={link_code}\">{name}</a></b> ({stat_text}) "
+        link_template = f"<b><a href=\"https://t.me/banditchatbot/market?startapp={link_code}\">{name}</a></b> {stat_text} "
 
         if compared_data.old_price != 0 and compared_data.type in [0, 1]:
             percentage = round((1.0 - round(compared_data.price / compared_data.old_price, 2)) * 100 * -1, 2)
@@ -50,7 +49,7 @@ def make_text(data: list[utils.CompareItemData], items_data: list) -> list:
                 percentage_text = "+" + str(percentage)
             else:
                 percentage_text = str(percentage)
-            percentage_text = "(" + percentage_text + ")"
+            percentage_text = "(" + percentage_text + "%)"
         else:
             percentage_text = ""
 
